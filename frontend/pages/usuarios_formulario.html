@@ -1,0 +1,74 @@
+﻿<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Usuarios - Formulario</title>
+    <link rel="stylesheet" href="/frontend/css/material.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1 id="form-title">Crear usuario</h1>
+      <div class="actions">
+        <a class="btn secondary" href="usuarios_lista.html">Volver a lista</a>
+      </div>
+      <div id="form-alert" class="alert" style="display:none"></div>
+      <form id="usuario-form" class="card">
+        <div class="form-grid">
+          <div>
+            <label>Tipo documento</label>
+            <select name="tipo_documento" required>
+              <option value="CC">Cedula</option>
+              <option value="CE">Cedula extranjeria</option>
+              <option value="TI">Tarjeta identidad</option>
+              <option value="PAS">Pasaporte</option>
+            </select>
+          </div>
+          <div>
+            <label>Numero documento</label>
+            <input type="text" name="numero_documento" required />
+          </div>
+          <div>
+            <label>Nombre completo</label>
+            <input type="text" name="nombre_completo" required />
+          </div>
+          <div>
+            <label>Edad</label>
+            <input type="number" name="edad" min="1" required />
+          </div>
+          <div>
+            <label>Sexo</label>
+            <select name="sexo" required>
+              <option value="M">Masculino</option>
+              <option value="F">Femenino</option>
+              <option value="O">Otro</option>
+            </select>
+          </div>
+          <div>
+            <label>Direccion</label>
+            <input type="text" name="direccion" required />
+          </div>
+          <div>
+            <label>Username</label>
+            <input type="text" name="username" required />
+          </div>
+          <div>
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Dejar vacio para mantener" />
+          </div>
+        </div>
+
+        <h2>Telefonos</h2>
+        <div id="phones-container" class="phone-list"></div>
+        <button type="button" class="btn secondary" id="add-phone">Agregar telefono</button>
+
+        <div style="margin-top: 20px;">
+          <button type="submit" class="btn">Guardar</button>
+        </div>
+      </form>
+    </main>
+    <script src="/frontend/js/api.js"></script>
+    <script src="/frontend/js/telefonos.js"></script>
+    <script src="/frontend/js/usuarios.js"></script>
+  </body>
+</html>

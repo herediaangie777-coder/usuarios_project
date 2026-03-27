@@ -1,0 +1,55 @@
+﻿<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Usuarios - Detalle</title>
+    <link rel="stylesheet" href="/frontend/css/material.css" />
+  </head>
+  <body>
+    <main class="container" id="usuario-detalle">
+      <h1>Detalle de usuario</h1>
+      <div class="actions">
+        <a class="btn secondary" href="usuarios_lista.html">Volver a lista</a>
+      </div>
+      <div id="detalle-alert" class="alert" style="display:none"></div>
+
+      <div class="card">
+        <h2 id="detalle-nombre">Nombre</h2>
+        <p><strong>Documento:</strong> <span id="detalle-documento"></span></p>
+        <p><strong>Username:</strong> <span id="detalle-username"></span></p>
+        <p><strong>Direccion:</strong> <span id="detalle-direccion"></span></p>
+      </div>
+
+      <div class="card">
+        <h2>Telefonos</h2>
+        <div id="telefonos-list" class="phone-list"></div>
+      </div>
+
+      <div class="card">
+        <h2>Agregar telefono</h2>
+        <form id="telefono-form" class="form-grid">
+          <div>
+            <label>Numero</label>
+            <input type="text" name="numero" required />
+          </div>
+          <div>
+            <label>Tipo</label>
+            <select name="tipo" required>
+              <option value="movil">Movil</option>
+              <option value="fijo">Fijo</option>
+              <option value="trabajo">Trabajo</option>
+            </select>
+          </div>
+          <div>
+            <label>&nbsp;</label>
+            <button type="submit" class="btn">Agregar</button>
+          </div>
+        </form>
+      </div>
+    </main>
+    <script src="/frontend/js/api.js"></script>
+    <script src="/frontend/js/telefonos.js"></script>
+    <script src="/frontend/js/usuarios.js"></script>
+  </body>
+</html>

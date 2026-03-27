@@ -1,0 +1,35 @@
+﻿<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Usuarios - Lista</title>
+    <link rel="stylesheet" href="/frontend/css/material.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>Usuarios</h1>
+      <div class="actions">
+        <a class="btn" href="usuarios_formulario.html">Crear usuario</a>
+        <a class="btn secondary" href="/">Inicio</a>
+      </div>
+      <div id="lista-alert" class="alert" style="display:none"></div>
+      <div class="card">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Codigo</th>
+              <th>Nombre</th>
+              <th>Documento</th>
+              <th>Username</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="usuarios-table-body"></tbody>
+        </table>
+      </div>
+    </main>
+    <script src="/frontend/js/api.js"></script>
+    <script src="/frontend/js/usuarios.js"></script>
+  </body>
+</html>
