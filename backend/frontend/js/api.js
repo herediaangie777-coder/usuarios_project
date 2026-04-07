@@ -11,19 +11,18 @@ async function apiRequest(path, options = {}) {
   }
 
   const response = await fetch(`${API_BASE}${path}`, config);
+
   let payload = null;
 
   try {
     payload = await response.json();
   } catch (err) {
-    payload = { status: "error", message: "Respuesta invalida del servidor" };
+    throw new Error("Respuesta inválida del servidor");
   }
 
-  if (!response.ok || payload.status === "error") {
-    const error = new Error(payload.message || "Error en la solicitud");
-    error.data = payload.data || {};
-    throw error;
+  if (!response.ok) {
+    throw new Error(JSON.stringify(payload));
   }
 
-  return payload;
+  return payload; // 👈 ahora devuelve directo el JSON real
 }

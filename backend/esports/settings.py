@@ -1,6 +1,8 @@
 ﻿from pathlib import Path
-import os
 from dotenv import load_dotenv
+import os
+
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -21,7 +23,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    "apps.usuarios",
+    "api",
 ]
 
 MIDDLEWARE = [
@@ -34,37 +36,55 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "config.urls"
+ROOT_URLCONF = "esports.urls"
+
+import os  # asegúrate que esté arriba del archivo
 
 TEMPLATES = [
     {
-        "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "frontend"],
-        "APP_DIRS": True,
-        "OPTIONS": {
-            "context_processors": [
-                "django.template.context_processors.debug",
-                "django.template.context_processors.request",
-                "django.contrib.auth.context_processors.auth",
-                "django.contrib.messages.context_processors.messages",
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'frontend')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = "config.wsgi.application"
+WSGI_APPLICATION = "esports.wsgi.application"
+
+db_engine = os.getenv("DB_ENGINE", "mssql").lower()
+if db_engine == "mysql":
+    engine_name = "django.db.backends.mysql"
+elif db_engine in {"mssql", "sql_server", "sql_server.pyodbc"}:
+    engine_name = "mssql"
+else:
+    engine_name = db_engine
 
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
         'NAME': 'usuarios_BD',
-        'HOST': 'DESKTOP-6HU1GP3\\SQLEXPRESS',
         'OPTIONS': {
             'driver': 'ODBC Driver 17 for SQL Server',
+            'server': '127.0.0.1,1433',
             'trusted_connection': 'yes',
         },
     }
 }
+if DATABASES["default"]["ENGINE"] in {"mssql", "sql_server.pyodbc"}:
+    DATABASES["default"]["OPTIONS"] = {
+        "driver": os.getenv("DB_DRIVER", "ODBC Driver 17 for SQL Server"),
+        "trusted_connection": os.getenv("DB_TRUSTED_CONNECTION", "yes"),
+    }
+elif DATABASES["default"]["ENGINE"] == "django.db.backends.mysql":
+    DATABASES["default"]["OPTIONS"] = {
+        "charset": os.getenv("DB_CHARSET", "utf8mb4"),
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -96,4 +116,5 @@ REST_FRAMEWORK = {
     "DEFAULT_PARSER_CLASSES": [
         "rest_framework.parsers.JSONParser",
     ],
+    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.openapi.AutoSchema",
 }

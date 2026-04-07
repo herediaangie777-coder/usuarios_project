@@ -6,7 +6,7 @@ from django.db.models import Max
 from django.shortcuts import get_object_or_404
 from rest_framework import serializers
 
-from .models import (
+from ..models import (
     Usuario,
     Atleta,
     Arbitro,
@@ -20,7 +20,7 @@ from .models import (
     Telefono,
     RedSocial,
 )
-from .serializers import (
+from .serializers_full import (
     UsuarioSerializer,
     TelefonoSerializer,
     RedSocialSerializer,
@@ -128,7 +128,7 @@ class TelefonoService:
 
     @staticmethod
     def agregar_telefono(usuario_id, data):
-        from .models import Usuario, Telefono
+        from ..models import Usuario, Telefono
 
         usuario = Usuario.objects.get(pk=usuario_id)
         return Telefono.objects.create(usuario=usuario, **data)

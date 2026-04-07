@@ -17,7 +17,7 @@ async function loadUsuariosList() {
     const tbody = document.getElementById("usuarios-table-body");
     tbody.innerHTML = "";
 
-    result.data.forEach((usuario) => {
+    result.forEach((usuario) => {
       const row = document.createElement("tr");
       row.innerHTML = `
         <td>${usuario.codigo}</td>
@@ -90,7 +90,7 @@ async function loadUsuarioForm() {
   if (id) {
     try {
       const result = await apiRequest(`/usuarios/${id}/`);
-      const usuario = result.data;
+      const usuario = result;
       form.tipo_documento.value = usuario.tipo_documento;
       form.numero_documento.value = usuario.numero_documento;
       form.nombre_completo.value = usuario.nombre_completo;
@@ -150,7 +150,7 @@ async function loadUsuarioDetalle() {
 
   try {
     const result = await apiRequest(`/usuarios/${id}/`);
-    const usuario = result.data;
+    const usuario = result;
     document.getElementById("detalle-nombre").textContent = usuario.nombre_completo;
     document.getElementById("detalle-documento").textContent = usuario.numero_documento;
     document.getElementById("detalle-username").textContent = usuario.username;
