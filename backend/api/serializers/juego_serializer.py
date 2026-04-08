@@ -7,7 +7,10 @@ from .plataforma_serializer import PlataformaSerializer
 class JuegoSerializer(serializers.ModelSerializer):
     plataformas = PlataformaSerializer(many=True, read_only=True)
     plataformas_ids = serializers.PrimaryKeyRelatedField(
-        queryset=Plataforma.objects.all(), many=True, write_only=True, required=False
+        queryset=Plataforma.objects.all(),
+        many=True,
+        write_only=True,
+        required=False,
     )
 
     class Meta:

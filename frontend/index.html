@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro de Entrenamiento E-Sports</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <main class="layout">
+        <header class="hero">
+            <p class="eyebrow">Frontend Vanilla conectado a la API pública</p>
+            <h1>Centro de Entrenamiento E-Sports</h1>
+            <p class="subtitle">Consume únicamente <code>/api/v1/plataformas/</code>, <code>/api/v1/juegos/</code> y <code>/api/v1/equipos/</code>.</p>
+        </header>
+
+        <section class="panel">
+            <div class="panel-header">
+                <h2>CRUD de Plataformas</h2>
+                <p>Entidad editable desde este front para cumplir el requerimiento de creación, edición y eliminación.</p>
+            </div>
+
+            <form id="platform-form" class="grid">
+                <input type="hidden" id="platform-id">
+                <label>
+                    Nombre
+                    <input id="platform-name" type="text" required>
+                </label>
+                <label>
+                    Marca
+                    <input id="platform-brand" type="text" required>
+                </label>
+                <div class="actions">
+                    <button type="submit">Guardar</button>
+                    <button type="button" id="platform-reset" class="secondary">Limpiar</button>
+                </div>
+            </form>
+            <p id="platform-message" class="message" role="status"></p>
+            <div id="platform-list" class="cards"></div>
+        </section>
+
+        <section class="panel">
+            <div class="panel-header">
+                <h2>Juegos</h2>
+                <p>Listado consumiendo la API pública con plataformas asociadas.</p>
+            </div>
+            <div id="game-list" class="cards"></div>
+        </section>
+
+        <section class="panel">
+            <div class="panel-header">
+                <h2>Equipos</h2>
+                <p>Listado consumiendo la API pública mostrando nombre, juego y nivel.</p>
+            </div>
+            <div id="team-list" class="cards"></div>
+        </section>
+    </main>
+
+    <script src="./app.js"></script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesiones</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-dark text-light">
+    <div class="container py-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>// SESIONES</h2>
+            <div class="d-flex gap-2">
+                <a href="{% url 'inicio' %}" class="btn btn-outline-light">Inicio</a>
+                <a href="{% url 'entrenamientos_form' %}" class="btn btn-info">Agendar</a>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-dark table-bordered align-middle">
+                <thead>
+                    <tr>
+                        <th>Juego</th>
+                        <th>Fecha</th>
+                        <th>Horario</th>
+                        <th>Arbitro</th>
+                        <th>Objetivo</th>
+                        <th>Estado</th>
+                        <th>XP</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for sesion in sesiones %}
+                    <tr>
+                        <td>{{ sesion.juego }}</td>
+                        <td>{{ sesion.fecha }}</td>
+                        <td>{{ sesion.hora_inicio }} - {{ sesion.hora_fin }}</td>
+                        <td>{% if sesion.arbitro %}{{ sesion.arbitro.nombre_completo }}{% else %}-{% endif %}</td>
+                        <td>
+                            {% if sesion.atleta %}
+                            {{ sesion.atleta.nombre_completo }}
+                            {% elif sesion.equipo %}
+                            {{ sesion.equipo.nombre }}
+                            {% else %}
+                            -
+                            {% endif %}
+                        </td>
+                        <td>{{ sesion.estado }}</td>
+                        <td>{{ sesion.puntos_experiencia }}</td>
+                        <td class="d-flex gap-2">
+                            <button class="btn btn-success btn-sm" onclick="iniciarSesion('{{ sesion.id }}')">INICIAR</button>
+                            <button class="btn btn-warning btn-sm" onclick="cerrarSesion('{{ sesion.id }}')">CERRAR</button>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="8" class="text-center">No hay sesiones registradas.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="{% static 'js/entrenamiento.js' %}"></script>
+</body>
+</html>

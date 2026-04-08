@@ -26,6 +26,6 @@ class Consola(Hardware):
 
     def registrar_salida(self):
         if self.total_existentes <= 0:
-            return
+            raise ValueError("No hay consolas disponibles para registrar salida.")
         self.total_existentes -= 1
         self.save(update_fields=["total_existentes"])

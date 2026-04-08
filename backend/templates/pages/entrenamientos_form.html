@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar Sesion eSports</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0d0d0d;
+            color: #00f3ff;
+            font-family: "Courier New", Courier, monospace;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cyber-card {
+            background: rgba(20, 20, 20, 0.95);
+            border: 2px solid #00f3ff;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+            padding: 2rem;
+            width: 100%;
+            max-width: 760px;
+        }
+
+        .form-control, .form-select {
+            background-color: #000 !important;
+            border: 1px solid #00f3ff !important;
+            color: #00f3ff !important;
+            border-radius: 0;
+        }
+
+        .btn-cyber {
+            background: transparent;
+            border: 2px solid #ff00ff;
+            color: #ff00ff;
+            font-weight: bold;
+            letter-spacing: 3px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="cyber-card">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="m-0">// AGENDAR_ENTRENAMIENTO</h2>
+            <a href="{% url 'sesiones_lista' %}" class="btn btn-outline-info">VER_SESIONES</a>
+        </div>
+
+        <form id="sesion-form" class="row g-4">
+            {% csrf_token %}
+            <div class="col-md-12">
+                <label class="form-label">Juego</label>
+                <input type="text" name="juego" class="form-control" placeholder="Valorant" required>
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Fecha</label>
+                <input type="date" name="fecha" class="form-control" required>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Hora inicio</label>
+                <input type="time" name="hora_inicio" class="form-control" required>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Hora fin</label>
+                <input type="time" name="hora_fin" class="form-control" required>
+            </div>
+            <div class="col-md-12">
+                <label class="form-label">Arbitro monitor</label>
+                <input
+                    type="text"
+                    name="arbitro_nombre_input"
+                    id="arbitro-nombre-input"
+                    class="form-control"
+                    list="arbitros-lista"
+                    placeholder="Escribe o selecciona un arbitro"
+                    required
+                >
+                <input type="hidden" name="arbitro" id="arbitro-id">
+                <datalist id="arbitros-lista">
+                    {% for arbitro in arbitros %}
+                    <option value="{{ arbitro.nombre_completo }}" data-id="{{ arbitro.id }}"></option>
+                    {% endfor %}
+                </datalist>
+                <small class="text-secondary">Puedes elegir uno existente o escribir uno nuevo.</small>
+            </div>
+
+            <div class="col-12">
+                <label class="form-label d-block">Tipo de objetivo</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="tipo_target" id="atleta" value="atleta" checked>
+                    <label class="form-check-label" for="atleta">Atleta</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="tipo_target" id="equipo" value="equipo">
+                    <label class="form-check-label" for="equipo">Equipo</label>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Atleta</label>
+                <select name="atleta" class="form-select">
+                    <option value="">Selecciona un usuario</option>
+                    {% for usuario in usuarios %}
+                    <option value="{{ usuario.id }}">{{ usuario.nombre_completo }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Equipo</label>
+                <select name="equipo" class="form-select">
+                    <option value="">Selecciona un equipo</option>
+                    {% for equipo in equipos %}
+                    <option value="{{ equipo.id }}">{{ equipo.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="col-12 text-center">
+                <button type="submit" class="btn btn-cyber w-100">GUARDAR_SESION</button>
+            </div>
+        </form>
+    </div>
+    <script src="{% static 'js/entrenamiento.js' %}"></script>
+</body>
+</html>

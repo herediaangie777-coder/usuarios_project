@@ -7,9 +7,13 @@ requires-python = ">=3.10"
 dependencies = [
   "Django>=4.2,<5.1",
   "djangorestframework>=3.14",
+  "django-filter>=24.2",
   "python-dotenv>=1.0",
   "mssql-django>=1.4",
   "pyodbc>=5.0",
+  "mysqlclient>=2.2",
+  "coreapi>=2.3",
+  "setuptools>=69.0",
 ]
 
 [tool.black]

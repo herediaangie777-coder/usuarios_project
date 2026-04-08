@@ -1,133 +1,146 @@
-🚀 🧾 MANUAL DEL PROYECTO – USUARIOS PROJECT
-📌 1. DESCRIPCIÓN
+# Centro de Entrenamiento E-Sports
 
-Este proyecto es un backend desarrollado en:
+Sistema de información para gestionar el Centro de Entrenamiento de E-Sports de Ciudad del Río. El proyecto incluye un backend con Django y Django REST Framework, un frontend vanilla que consume la API pública y documentación técnica para despliegue local.
 
-Python
-Django
-Django REST Framework
-SQL Server
+## Stack tecnológico
 
-Permite gestionar:
+- Python 3.10+
+- Django 4.2+
+- Django REST Framework 3.14+
+- SQL Server 2019+ o MySQL 8+
+- python-dotenv
+- CoreAPI para documentación
+- HTML, CSS y JavaScript vanilla para el frontend
 
-Usuarios (con roles: atleta, árbitro, etc)
-Equipos
-Juegos
-Plataformas
-Trofeos
-Hardware (consolas y controles)
-Sesiones de entrenamiento
-🛠️ 2. REQUISITOS
+## Estructura
 
-Instalar:
+- [backend/](./backend): proyecto Django
+- [frontend/](./frontend): frontend vanilla consumiendo la API pública
+- [database/schema.sql](./database/schema.sql): script DDL
+- [database/seed.sql](./database/seed.sql): datos de prueba
+- [docs/](./docs): diagramas y documentación de apoyo
+- [.env.example](./.env.example): plantilla de variables de entorno
 
-Python 3.11+
-SQL Server (Express o completo)
-ODBC Driver 17 o 18
-Git (opcional)
+## Prerrequisitos
 
-📦 3. INSTALACIÓN
+- Python 3.10 o superior
+- SQL Server 2019+ con ODBC Driver 17 o MySQL 8+
+- Git
+- UV recomendado o PIP como alternativa
 
-🔹 Clonar proyecto
-git clone <repo>
-cd usuarios_project
+## Instalación con UV
 
-🔹 Crear entorno virtual
+```bash
+uv venv
+uv pip install -r requirements.txt
+```
+
+## Instalación con PIP
+
+```bash
 python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+```
 
-🔹 Activar entorno
-.\.venv\Scripts\activate
+## Configuración `.env`
 
-🔹 Instalar dependencias
-pip install Django djangorestframework python-dotenv mssql-django pyodbc
+1. Copia `.env.example` como `.env`.
+2. Ajusta las credenciales según tu motor de base de datos.
 
-⚙️ 4. CONFIGURACIÓN
+Ejemplo para SQL Server:
 
-Crear archivo .env en la raíz:
-
-DB_NAME=usuarios_BD
-DB_HOST=localhost\SQLEXPRESS
+```env
+DJANGO_SECRET_KEY=change-me
+DJANGO_DEBUG=True
+DJANGO_ALLOWED_HOSTS=127.0.0.1,localhost
+DB_ENGINE=mssql
+DB_NAME=proyecto_sena
+DB_USER=
+DB_PASSWORD=
+DB_HOST=127.0.0.1
 DB_PORT=1433
 DB_DRIVER=ODBC Driver 17 for SQL Server
+DB_EXTRA_PARAMS=Trusted_Connection=yes;Encrypt=no
+```
 
-👉 Si usan usuario/contraseña:
+Ejemplo para MySQL:
 
-DB_USER=usuario
-DB_PASSWORD=contraseña
-🗄️ 5. BASE DE DATOS
-🔥 OPCIÓN RECOMENDADA (PRO)
+```env
+DB_ENGINE=mysql
+DB_NAME=proyecto_sena
+DB_USER=root
+DB_PASSWORD=secret
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_CHARSET=utf8mb4
+```
 
-👉 NO envíes la base de datos
+## Base de datos
 
-✔ Cada desarrollador debe crearla
+Puedes trabajar de dos formas:
 
-🔹 Crear BD en SQL Server
-CREATE DATABASE usuarios_BD;
+### Opción 1. Migraciones Django
 
-🔹 Ejecutar migraciones
-python manage.py makemigrations
-python manage.py migrate
+```bash
+cd backend
+py manage.py makemigrations
+py manage.py migrate
+```
 
-💥 Esto crea todas las tablas automáticamente
+### Opción 2. Script SQL
 
-📊 6. DATOS INICIALES (OPCIONAL)
+Ejecuta:
 
-Si necesitas datos de prueba:
+- [database/schema.sql](./database/schema.sql)
+- [database/seed.sql](./database/seed.sql)
 
-python manage.py createsuperuser
+## Superusuario y servidor
 
-▶️ 7. EJECUTAR SERVIDOR
-python manage.py runserver
+```bash
+cd backend
+py manage.py createsuperuser
+py manage.py runserver
+```
 
-🌐 8. ENDPOINTS
+## URLs principales
 
-Base URL:
+- API pública: `http://localhost:8000/api/v1/`
+- Documentación: `http://localhost:8000/docs/`
+- Admin: `http://localhost:8000/admin/`
+- Front interno basado en templates: `http://localhost:8000/`
 
-http://127.0.0.1:8000/api/
+## Endpoints públicos
 
-Ejemplos:
+- `GET|POST|PUT|PATCH|DELETE /api/v1/plataformas/`
+- `GET|POST|PUT|PATCH|DELETE /api/v1/juegos/`
+- `GET|POST|PUT|PATCH|DELETE /api/v1/equipos/`
 
-GET /usuarios/
-POST /usuarios/
-GET /equipos/
-POST /sesiones/
+La lógica de usuarios, sesiones, trofeos y hardware permanece implementada en el backend y administrable desde Django Admin.
 
-🧪 9. PRUEBAS
+## Ejecutar el frontend
 
-Se recomienda usar:
+El frontend se encuentra en [frontend/index.html](./frontend/index.html) y consume `http://localhost:8000/api/v1/`.
 
-Postman
-Thunder Client (VS Code)
+Puedes abrirlo con cualquier servidor estático simple. Ejemplo con Python:
 
-⚠️ 10. PROBLEMAS COMUNES
-❌ No encuentra Django
-ModuleNotFoundError: django
+```bash
+cd frontend
+py -m http.server 5500
+```
 
-👉 Activar entorno virtual:
+Luego abre:
 
-.\.venv\Scripts\activate
+- `http://localhost:5500`
 
-❌ Error SQL Server
+## Diagramas
 
-👉 Revisar:
+- [docs/diagrama_clases.pdf](./docs/diagrama_clases.pdf)
+- [docs/diagrama_relacional.pdf](./docs/diagrama_relacional.pdf)
+- [docs/diagrama_clases_centro_entrenamiento_v4_final.html](./docs/diagrama_clases_centro_entrenamiento_v4_final.html)
 
-Instancia (SQLEXPRESS)
-Driver ODBC
-Puerto 1433
+## Notas
 
-❌ Error migraciones
-python manage.py makemigrations
-python manage.py migrate
-
-🧠 11. ARQUITECTURA
-models.py → Base de datos
-serializers.py → Validación
-services.py → Lógica
-views.py → Endpoints
-
-🚀 12. BUENAS PRÁCTICAS
-No modificar directamente la BD
-Siempre usar migraciones
-Mantener lógica en services
-No poner lógica en views
-
+- `.env` está ignorado en `.gitignore`.
+- El backend sigue el patrón split-folder en `api/models`, `api/serializers` y `api/views`.
+- El frontend implementa manejo básico de errores HTTP y de red.

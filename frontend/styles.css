@@ -1,0 +1,137 @@
+:root {
+    --bg: #07131a;
+    --panel: #10222c;
+    --line: #1f4f5f;
+    --text: #e9f7fb;
+    --muted: #9bc5d1;
+    --accent: #ff6b35;
+    --accent-2: #19c37d;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(circle at top left, rgba(25, 195, 125, 0.18), transparent 30%),
+        radial-gradient(circle at top right, rgba(255, 107, 53, 0.18), transparent 25%),
+        linear-gradient(180deg, #061017, #0b1b23 42%, #09141a);
+}
+
+.layout {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 20px 60px;
+}
+
+.hero {
+    margin-bottom: 28px;
+}
+
+.eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent-2);
+    font-size: 0.8rem;
+}
+
+h1, h2 {
+    margin: 0 0 10px;
+}
+
+.subtitle, .panel-header p, .message {
+    color: var(--muted);
+}
+
+.panel {
+    background: rgba(16, 34, 44, 0.92);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 22px;
+    backdrop-filter: blur(8px);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    align-items: end;
+}
+
+label {
+    display: grid;
+    gap: 6px;
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+input, button {
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    padding: 12px 14px;
+    font: inherit;
+}
+
+input {
+    background: #08161d;
+    color: var(--text);
+}
+
+button {
+    cursor: pointer;
+    background: var(--accent);
+    color: white;
+    border: none;
+}
+
+button.secondary {
+    background: transparent;
+    border: 1px solid var(--line);
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+    margin-top: 14px;
+}
+
+.card {
+    background: #0b1820;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 16px;
+}
+
+.card h3 {
+    margin: 0 0 8px;
+}
+
+.card p {
+    margin: 6px 0;
+    color: var(--muted);
+}
+
+.card-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.card-actions button {
+    flex: 1;
+}
+
+.card-actions .danger {
+    background: #b42318;
+}

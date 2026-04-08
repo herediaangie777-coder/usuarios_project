@@ -1,0 +1,64 @@
+﻿:root {
+    --neon-cyan: #00ffff;
+    --neon-magenta: #ff00ff;
+    --bg-black: #050505;
+    --panel-dark: #0f0f0f;
+    --terminal-green: #00ff41;
+}
+
+body {
+    background-color: var(--bg-black);
+    color: #e0e0e0;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* Efecto de Escaneo de pantalla antigua */
+body::before {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 9999;
+    pointer-events: none;
+    background-size: 100% 2px, 3px 100%;
+}
+
+.cyber-nav {
+    border-bottom: 2px solid var(--neon-magenta);
+    box-shadow: 0 0 15px var(--neon-magenta);
+    background-color: var(--bg-black) !important;
+}
+
+.cyber-card {
+    background: var(--panel-dark);
+    border: 1px solid var(--neon-cyan);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+    transition: 0.3s;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 85% 100%, 0% 100%); /* Esquina cortada futurista */
+}
+
+.cyber-card:hover {
+    box-shadow: 0 0 20px var(--neon-cyan);
+    transform: translateY(-5px);
+}
+
+.text-neon {
+    color: var(--neon-cyan);
+    text-shadow: 0 0 5px var(--neon-cyan);
+}
+
+.btn-cyber {
+    background: transparent;
+    border: 1px solid var(--neon-magenta);
+    color: var(--neon-magenta);
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.btn-cyber:hover {
+    background: var(--neon-magenta);
+    color: black;
+    box-shadow: 0 0 20px var(--neon-magenta);
+}
